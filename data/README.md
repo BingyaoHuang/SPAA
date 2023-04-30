@@ -3,7 +3,7 @@
 
 ## Usage
 
-Download and extract this zip to folder ``SPAA/data`` and follow instructions [here][3]. See [paper][1] and [supplementary][2].
+Download and extract [this zip (~3.25 GB)][1] to folder ``SPAA/data`` and follow instructions [here][2]. 
 
 ## Folder Structure
 
@@ -309,6 +309,5 @@ Download and extract this zip to folder ``SPAA/data`` and follow instructions [h
 - We thank the authors of the colorful textured sampling images.
 - Feel free to open an issue if you have any questions/suggestions/concerns 😁. 
 
-[1]: https://bingyaohuang.github.io/pub/SPAA
-[2]: https://bingyaohuang.github.io/pub/SPAA/supp
-[3]: https://github.com/BingyaoHuang/SPAA
+[1]: https://bingyaohuang.github.io/pub/SPAA/data
+[2]: https://github.com/BingyaoHuang/SPAA
