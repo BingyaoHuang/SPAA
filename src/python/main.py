@@ -85,7 +85,7 @@ im_cam = cc(torch.Tensor(cv.cvtColor(cv.resize(cc(im_cam, setup_info['cam_crop_s
 ut.fs(im_cam)
 
 # check results of each classifier
-classifier_names = ['resnet18', 'vgg16', 'inception_v3']
+classifier_names = ['inception_v3', 'resnet18', 'vgg16']
 query_multi_classifiers(im_cam, setup_info['classifier_crop_sz'], classifier_names, imagenet_labels, device, device_ids)
 
 cam.release()
@@ -130,7 +130,7 @@ for phase in ['ref', 'cb', 'sl', 'train', 'test']:
     if phase == 'ref':
         # double check if the scene image is correctly classified by all classifiers
         cam_scene = ut.torch_imread(join(setup_path, 'cam/raw/ref/img_0002.png'))
-        classifier_names = ['resnet18', 'vgg16', 'inception_v3']
+        classifier_names = ['inception_v3', 'resnet18', 'vgg16']
         pred_labels, _ = query_multi_classifiers(cam_scene, setup_info['classifier_crop_sz'], classifier_names, imagenet_labels, device, device_ids)
         assert pred_labels.count(pred_labels[0]) == len(classifier_names), 'Classifiers made different predictions!'
 
