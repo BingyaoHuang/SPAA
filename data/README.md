@@ -6,7 +6,8 @@
 Download and extract [this zip (~3.25 GB)][1] to folder ``SPAA/data`` and follow instructions [here][2]. 
 
 ## Folder Structure
-
+```
+  data
     ├─prj_share                # projector input images shared by each setup
     │  ├─init                  # for CompenNet initialization
     │  ├─numbers               # test whether the projector and the camera are in sync
@@ -287,22 +288,29 @@ Download and extract [this zip (~3.25 GB)][1] to folder ``SPAA/data`` and follow
         │                  ├─resnet18
         │                  └─vgg16
         ├─banana     # another setup
+        .
+        .
+        .
+        ├─imagenet1000_clsidx_to_labels.txt   # 1000 ImageNet idx and labels
+        ├─imagenet10_clsidx_to_labels.txt     # 10 targeted attacks idx and labels, you can modify it for new targets
+        ├─README.md                           # this file
+```
 
 ## Citation
-
-    @inproceedings{huang2022spaa,
-        title      = {SPAA: Stealthy Projector-based Adversarial Attacks on Deep Image Classifiers},
-        booktitle  = {2022 IEEE Conference on Virtual Reality and 3D User Interfaces (VR)},
-        author     = {Huang, Bingyao and Ling, Haibin},
-        year       = {2022},
-        month      = mar,
-        pages      = {534--542},
-        publisher  = {IEEE},
-        address    = {Christchurch, New Zealand},
-        doi        = {10.1109/VR51125.2022.00073},
-        isbn       = {978-1-66549-617-9}
-    }
-
+```
+  @inproceedings{huang2022spaa,
+      title      = {SPAA: Stealthy Projector-based Adversarial Attacks on Deep Image Classifiers},
+      booktitle  = {2022 IEEE Conference on Virtual Reality and 3D User Interfaces (VR)},
+      author     = {Huang, Bingyao and Ling, Haibin},
+      year       = {2022},
+      month      = mar,
+      pages      = {534--542},
+      publisher  = {IEEE},
+      address    = {Christchurch, New Zealand},
+      doi        = {10.1109/VR51125.2022.00073},
+      isbn       = {978-1-66549-617-9}
+  }
+```
 ## Acknowledgments
 
 - We thank the anonymous reviewers for valuable and inspiring comments and suggestions.

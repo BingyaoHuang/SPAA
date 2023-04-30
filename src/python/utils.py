@@ -700,7 +700,7 @@ def write_log_file(df, log_txt_filename=None, log_xls_filename=None, mode='w'):
 
 def log_to_table(filename):
     """
-    convert the old CompenNeSt++/DeProCams log files to pandas df
+    convert the old CompenNet/CompenNet++/CompenNeSt++/DeProCams log files to pandas df
     :param filename: full path to the log file
     :return: a pandas DataFrame
     """
