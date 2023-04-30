@@ -168,7 +168,7 @@ def train_compennet_pp(model, train_data, valid_data, cfg):
                                            layoutopts=dict(
                                                plotly=dict(title={'text': title, 'font': {'size': 24}},
                                                            font={'family': 'Arial', 'size': 20},
-                                                           hoverlabel={'font': {'size': 20}},
+                                                           hoverlabel={'font': {'size': 20}}, hovermode='x',
                                                            xaxis={'title': 'Iteration'},
                                                            yaxis={'title': 'Metrics', 'hoverformat': '.4f'}))))
     # main loop
@@ -285,7 +285,7 @@ def train_pcnet(model, train_data, valid_data, cfg):
                                            layoutopts=dict(
                                                plotly=dict(title={'text': title, 'font': {'size': 24}},
                                                            font={'family': 'Arial', 'size': 20},
-                                                           hoverlabel={'font': {'size': 20}},
+                                                           hoverlabel={'font': {'size': 20}}, hovermode='x',
                                                            xaxis={'title': 'Iteration'},
                                                            yaxis={'title': 'Metrics', 'hoverformat': '.4f'}))))
     # main loop
