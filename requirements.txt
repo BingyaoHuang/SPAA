@@ -1,0 +1,22 @@
+torch         == 2.0.0+cu117
+torchvision   == 0.15.1+cu117
+numpy         == 1.24.3
+scipy         == 1.9.1
+pandas        == 2.0.1
+pyyaml        == 6.0
+openpyxl      == 3.1.2
+matplotlib    == 3.7.1
+Pillow        == 9.5.0
+scikit-image  == 0.20.0
+opencv-python == 4.7.0.72
+ipython       == 8.13.0
+plotly        == 5.14.1
+visdom        == 0.2.4
+omegaconf     == 2.3.0
+tqdm          == 4.65.0
+# jupyter==1.0.0
+# PySide6==6.5.0 # PyCharm 2023.1's Python console may not be compatibile with this.
+# PyQt5==5.15.2  # for Jupyter notebook stand-alone plt window: %matplotlib qt
+
+# torch package location
+--find-links https://download.pytorch.org/whl/torch_stable.html

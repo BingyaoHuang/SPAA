@@ -1,0 +1,10 @@
+{ 1: 'goldfish, Carassius auratus',
+7: 'cock',
+21: 'kite',
+207: 'golden retriever',
+340: 'zebra',
+745: 'projector',
+779: 'school bus',
+846: 'table lamp',
+947: 'mushroom',
+950: 'orange'}

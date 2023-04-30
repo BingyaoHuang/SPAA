@@ -1,0 +1,8 @@
+/venv
+/.idea
+*.asv
+__pycache__
+*.mexw64
+/src/python/.idea
+checkpoint
+log
