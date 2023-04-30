@@ -4,6 +4,7 @@ Useful helper functions
 
 import os
 from os.path import join, abspath
+import sys
 import warnings
 import platform
 import math
@@ -539,8 +540,10 @@ def init_prj_window(prj_w, prj_h, val, offset=(3900, -300)):
 
 
 def init_cam(cam_raw_sz=None):
-    # cam = cv.VideoCapture(0)
-    cam = cv.VideoCapture(0, cv.CAP_DSHOW)  # windows only to get rid of the annoying warning
+    if sys.platform == 'win32':
+        cam = cv.VideoCapture(0, cv.CAP_DSHOW)  # windows only to get rid of the annoying warning
+    else:
+        cam = cv.VideoCapture(0)
 
     if cam_raw_sz is not None:
         cam.set(cv.CAP_PROP_FRAME_WIDTH, cam_raw_sz[0])
