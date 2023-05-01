@@ -298,18 +298,18 @@ Download and extract [this zip (~3.25 GB)][1] to folder ``SPAA/data`` and follow
 
 ## Citation
 ```
-  @inproceedings{huang2022spaa,
-      title      = {SPAA: Stealthy Projector-based Adversarial Attacks on Deep Image Classifiers},
-      booktitle  = {2022 IEEE Conference on Virtual Reality and 3D User Interfaces (VR)},
-      author     = {Huang, Bingyao and Ling, Haibin},
-      year       = {2022},
-      month      = mar,
-      pages      = {534--542},
-      publisher  = {IEEE},
-      address    = {Christchurch, New Zealand},
-      doi        = {10.1109/VR51125.2022.00073},
-      isbn       = {978-1-66549-617-9}
-  }
+@inproceedings{huang2022spaa,
+    title      = {SPAA: Stealthy Projector-based Adversarial Attacks on Deep Image Classifiers},
+    booktitle  = {2022 IEEE Conference on Virtual Reality and 3D User Interfaces (VR)},
+    author     = {Huang, Bingyao and Ling, Haibin},
+    year       = {2022},
+    month      = mar,
+    pages      = {534--542},
+    publisher  = {IEEE},
+    address    = {Christchurch, New Zealand},
+    doi        = {10.1109/VR51125.2022.00073},
+    isbn       = {978-1-66549-617-9}
+}
 ```
 ## Acknowledgments
 

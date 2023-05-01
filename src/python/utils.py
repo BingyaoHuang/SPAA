@@ -67,18 +67,6 @@ def init_visdom(server='localhost', port=8097):
 vis = init_visdom(port=8097)
 
 
-# def check_visdom_open(host='localhost', port=8097):
-#     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#     is_open = False
-#     try:
-#         s.bind((host, port))
-#     except socket.error:
-#         is_open = True
-#     finally:
-#         s.close()
-#     return is_open
-
-
 def reset_rng_seeds(seed):
     # set random number generators' seeds
     np.random.seed(seed)
@@ -86,8 +74,6 @@ def reset_rng_seeds(seed):
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
-    # torch.backends.cudnn.deterministic = True
-    # torch.backends.cudnn.benchmark = False
 
 
 def set_torch_reproducibility(reproducible=False):
@@ -582,7 +568,7 @@ def preview_cam(cam_raw_sz=None, cam_crop_sz=None):
 
 
 def project_capture_data(prj_input_path, cam_cap_path, setup_info):
-    print(f'Projecting {prj_input_path} and capturing to {cam_cap_path}')
+    print(f'Projecting {prj_input_path} and \ncapturing to {cam_cap_path}')
     # all sz are in (w, h) format
     prj_screen_sz, cam_raw_sz, cam_crop_sz, cam_im_sz, delay_frames, delay_time = setup_info['prj_screen_sz'], setup_info['cam_raw_sz'], setup_info[
         'cam_crop_sz'], setup_info[

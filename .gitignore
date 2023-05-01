@@ -1,8 +1,7 @@
-/venv
-/.idea
+venv
+.idea
 *.asv
-__pycache__
 *.mexw64
-/src/python/.idea
+__pycache__
 checkpoint
 log
