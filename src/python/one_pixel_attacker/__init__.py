@@ -125,13 +125,14 @@ class ProjectorOnePixelAttacker:
     # def __init__(self, class_names, prj_screen_sz, prj_im_sz, cam_raw_sz, cam_crop_sz, cam_im_sz, classifier_crop_sz):
     def __init__(self, class_names, cfg):
         self.prj_screen_sz, self.prj_im_sz                 = cfg['prj_screen_sz'], cfg['prj_im_sz']
+        self.prj_offset, self.prj_brightness               = cfg['prj_offset'], cfg['prj_brightness']
         self.cam_raw_sz, self.cam_crop_sz, self.cam_im_sz, = cfg['cam_raw_sz'], cfg['cam_crop_sz'], cfg['cam_im_sz'],
         self.classifier_crop_sz = cfg['classifier_crop_sz']
         self.delay_frames       = cfg['delay_frames']
         self.delay_time         = cfg['delay_time']
         # self.cam_crop_sz      = (min(cam_raw_sz)                        , min(cam_raw_sz))
         self.cam                = ut.init_cam(cfg['cam_raw_sz'])
-        self.prj                = ut.init_prj_window(*cfg['prj_screen_sz'], cfg['prj_brightness'])
+        self.prj                = ut.init_prj_window(*self.prj_screen_sz, self.prj_brightness, self.prj_offset)
         self.class_names        = class_names
 
         self.im_prj_org = None

@@ -75,7 +75,7 @@ ut.reset_rng_seeds(0)
 imagenet_labels = classifier.load_imagenet_labels(join(data_root, 'imagenet1000_clsidx_to_labels.txt'))
 
 # project a gray image and capture the scene
-prj = ut.init_prj_window(*setup_info['prj_screen_sz'], setup_info['prj_brightness'])
+prj = ut.init_prj_window(*setup_info['prj_screen_sz'], setup_info['prj_brightness'], setup_info['prj_offset'])
 cam = ut.init_cam(setup_info['cam_raw_sz'])
 
 # drop frames (avoid the wrong frame) and capture

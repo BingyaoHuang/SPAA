@@ -510,16 +510,18 @@ def init_prj_window(prj_w, prj_h, val, offset=(3900, -300)):
     fig = plt.figure()
 
     # uncheck pycharm scientific mode when you encounter error "AttributeError: 'FigureCanvasInterAgg' object has no attribute 'window'"
-    fig.canvas.window().statusBar().setVisible(False)
+    fig.canvas.window().statusBar().setVisible(False)  # (QtAgg only)
+
     ax = plt.imshow(im, interpolation='bilinear')
     plt.axis('off')
     plt.tight_layout()
     plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
-    figManager = plt.get_current_fig_manager()
-    figManager.window.setGeometry(*offset, prj_w, prj_h)  # change the offsets according to your setup
-    # fig.canvas.manager.setGeometry(3900, -300, prj_w, prj_h)
+
+    mng = plt.get_current_fig_manager()
+    mng.window.setGeometry(*offset, prj_w, prj_h)  # change the offsets according to your setup (QtAgg only)
     plt.pause(0.02)  # !!! MUST PAUSE, OTHERWISE FIGURE MOVES TO THE PRIMARY SCREEN
-    figManager.full_screen_toggle()  # not working here, resets window position to primary screen (Qt5Agfg)
+    mng.full_screen_toggle()  # to full screen (TkAgg may not work well, and resets window position to primary screen)
+
     fig.show()
 
     return ax
@@ -570,9 +572,8 @@ def preview_cam(cam_raw_sz=None, cam_crop_sz=None):
 def project_capture_data(prj_input_path, cam_cap_path, setup_info):
     print(f'Projecting {prj_input_path} and \ncapturing to {cam_cap_path}')
     # all sz are in (w, h) format
-    prj_screen_sz, cam_raw_sz, cam_crop_sz, cam_im_sz, delay_frames, delay_time = setup_info['prj_screen_sz'], setup_info['cam_raw_sz'], setup_info[
-        'cam_crop_sz'], setup_info[
-        'cam_im_sz'], setup_info['delay_frames'], setup_info['delay_time']
+    prj_screen_sz, prj_offset, cam_raw_sz, cam_crop_sz, cam_im_sz, delay_frames, delay_time = setup_info['prj_screen_sz'], setup_info['prj_offset'], setup_info['cam_raw_sz'], setup_info[
+        'cam_crop_sz'], setup_info['cam_im_sz'], setup_info['delay_frames'], setup_info['delay_time']
 
     if not os.path.exists(cam_cap_path):
         os.makedirs(cam_cap_path)
@@ -589,7 +590,7 @@ def project_capture_data(prj_input_path, cam_cap_path, setup_info):
 
     # initialize camera and project
     plt.close('all')
-    prj = init_prj_window(*prj_screen_sz, 0.5)
+    prj = init_prj_window(*prj_screen_sz, 0.5, prj_offset)
     cam = init_cam(cam_raw_sz)
 
     # clear camera buffer
