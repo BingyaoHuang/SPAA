@@ -19,7 +19,7 @@ from projector_based_attack import run_projector_based_attack, summarize_single_
 setup_info = DictConfig(dict(
     prj_screen_sz      = (800 , 600),   # projector screen resolution (i.e., set in the OS)
     prj_im_sz          = (256 , 256),   # projector input image resolution, the image will be scaled to match the prj_screen_sz by plt
-    prj_offset         = (3900, -300),  # an offset to move the projector plt figure to the correct screen (check your OS display setting)
+    prj_offset         = (3840,   0),   # an offset to move the projector plt figure to the correct screen (check your OS display setting)
     cam_raw_sz         = (1280, 720),   # the size of camera's direct output frame
     cam_crop_sz        = (960 , 720),   # a size used to center crop camera output frame, cam_crop_sz <= cam_raw_sz
     cam_im_sz          = (320 , 240),   # a size used to resize center cropped camera output frame, cam_im_sz <= cam_crop_sz, and should keep aspect ratio

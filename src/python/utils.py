@@ -22,10 +22,8 @@ from torch.utils.data import Dataset
 import pytorch_ssim
 import time
 import yaml
-
 from perc_al import deltaE
 from img_proc import resize, center_crop as cc
-
 from tqdm import tqdm
 
 # avoid pandas console display truncation
@@ -34,14 +32,16 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
 pd.set_option('display.max_colwidth', None)
 
-# use qt5agg backend for remote interactive interpreter plot below
-import matplotlib as mpl
+# Set matplotlib backend (if not specified, mpl will automatically decide: https://matplotlib.org/stable/users/explain/backends.html)
+# We use Qt5Agg backend for projector window, because TkAgg may not get the full screen correct,
+# and QtAgg may cause plt figures 'not responding' issue in PyCharm python console (https://youtrack.jetbrains.com/issue/PY-54194).
+# If you use MobaXterm X11 and see error message: "Cannot load backend 'Qt5Agg' which requires the 'qt5' interactive framework,
+# as 'headless' is currently running", just restart MobaXterm.
 
-# backend (if not specified, mpl will automatically decide)
-# restart MobaXterm if "Cannot load backend 'Qt5Agg' which requires the 'qt5' interactive framework, as 'headless' is currently running"
-# mpl.use('Qt5Agg') # image cannot correctly resize in full screen for init_prj_window()
-# mpl.use('QtAgg')  # [not compatible with PyCharm 2023.1] need PySide6, and figure may freeze if run it in PyCharm 2023.1's Python console. Maybe setting PyCharm 'PyQt compatible' to 'pyside6' solve this issue? https://youtrack.jetbrains.com/issue/PY-54194
-# mpl.use('TkAgg')  # cannot create stand-alone window for init_prj_window() in Jupyter notebook
+import matplotlib as mpl
+mpl.use('Qt5Agg')   # works well for PyCharm python console
+# mpl.use('QtAgg')  # figures are not responding in PyCharm python console, but can still be used to project and capture data in our task
+# mpl.use('TkAgg')  # only use TkAgg if you're not capturing data, e.g., on a server, because it resets the projector window to the primary screen in fullscreen mode, and it may not be able to create a stand-alone window for init_prj_window() in Jupyter notebook
 
 # disable toolbar and set background to black for full screen
 mpl.rcParams['toolbar'] = 'None'
@@ -492,7 +492,7 @@ def l2_norm_to_mse(x, num_chan):
 
 
 # ------------------------------------------- Data capture -----------------------------------------------
-def init_prj_window(prj_w, prj_h, val, offset=(3900, -300)):
+def init_prj_window(prj_w, prj_h, val, offset=(3840, 0)):
     """
     Initialize the projector window using plt
     :param prj_w:
@@ -507,10 +507,12 @@ def init_prj_window(prj_w, prj_h, val, offset=(3900, -300)):
     im = cv.resize(im, (disp_size, disp_size))
 
     # create figure and move to projector screen and set to full screen
+    plt_backend = plt.get_backend()
     fig = plt.figure()
 
-    # uncheck pycharm scientific mode when you encounter error "AttributeError: 'FigureCanvasInterAgg' object has no attribute 'window'"
-    fig.canvas.window().statusBar().setVisible(False)  # (QtAgg only)
+    # uncheck pycharm scientific "Show plots in tool window" when "AttributeError: 'FigureCanvasInterAgg' object has no attribute 'window'"
+    if 'Qt' in plt_backend:
+        fig.canvas.window().statusBar().setVisible(False)  # (Qt only)
 
     ax = plt.imshow(im, interpolation='bilinear')
     plt.axis('off')
@@ -518,10 +520,14 @@ def init_prj_window(prj_w, prj_h, val, offset=(3900, -300)):
     plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
 
     mng = plt.get_current_fig_manager()
-    mng.window.setGeometry(*offset, prj_w, prj_h)  # change the offsets according to your setup (QtAgg only)
-    plt.pause(0.02)  # !!! MUST PAUSE, OTHERWISE FIGURE MOVES TO THE PRIMARY SCREEN
-    mng.full_screen_toggle()  # to full screen (TkAgg may not work well, and resets window position to primary screen)
-
+    if 'Qt' in plt_backend:
+        mng.window.setGeometry(*offset, prj_w, prj_h)  # change the offsets according to your setup (Qt only)
+        mng.full_screen_toggle()  # to full screen (TkAgg may not work well, and resets the window position to the primary screen)
+    elif 'Tk' in plt_backend:     # Windows only, and the frame rate is not stable
+        mng.window.geometry(f'{prj_w}x{prj_h}+{offset[0]}+{offset[1]}')
+        mng.window.overrideredirect(1)  # Windows only
+        mng.window.state('zoomed')      # Windows only
+        plt.pause(0.02)
     fig.show()
 
     return ax
