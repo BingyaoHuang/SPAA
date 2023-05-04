@@ -82,7 +82,7 @@ cam = ut.init_cam(setup_info['cam_raw_sz'])
 for j in range(0, 50):
     _, im_cam = cam.read()
 im_cam = cc(torch.Tensor(cv.cvtColor(cv.resize(cc(im_cam, setup_info['cam_crop_sz']), setup_info['cam_im_sz'], interpolation=cv.INTER_AREA), cv.COLOR_BGR2RGB)).permute(2, 0, 1) / 255, setup_info['classifier_crop_sz'])
-ut.fs(im_cam)
+ut.fs(im_cam, title='camera-captured scene')
 
 # check results of each classifier
 classifier_names = ['inception_v3', 'resnet18', 'vgg16']

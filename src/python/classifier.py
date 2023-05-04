@@ -97,6 +97,7 @@ class UnNormalize(object):
 def query_multi_classifiers(im, cp_sz, classifier_names, imagenet_labels, device, device_ids):
     labels, confidence = [], []
     for classifier_name in classifier_names:
+        print(f'Testing {classifier_name}')
         classifier = Classifier(classifier_name, device, device_ids, fix_params=True, sort_results=False)
         _, p, _ = classifier(im, cp_sz)
         labels.append(imagenet_labels[p.argmax()])
