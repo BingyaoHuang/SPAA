@@ -590,7 +590,7 @@ def summarize_all_attackers(attacker_names, data_root, setup_list, recreate_stat
         for attacker_name in attacker_names:
             attacker_cfg_str = to_attacker_cfg_str(attacker_name)[0]
             ret_path = join(setup_path, 'ret', attacker_cfg_str)
-            print(f'Gathering stats of {ret_path}')
+            print(f'\nGathering stats of {ret_path}')
 
             # (time-consuming) recreate stats.txt, stats.xls and images in [ret] folder for each setup
             if recreate_stats_and_imgs:
