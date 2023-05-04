@@ -1,5 +1,5 @@
 """
-Setup ProCams and capture data
+Set up ProCams and capture data
 """
 import os
 from os.path import join, abspath
