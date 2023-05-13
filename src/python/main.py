@@ -151,6 +151,15 @@ spaa_cfg = run_projector_based_attack(spaa_cfg)
 print(f'Finish SPAA attack, you may want to transfer the data in {join(setup_path, "prj/adv")} to the local machine for real projector-based attacks')
 
 # %% (5.2) [local] Project and capture SPAA generated adversarial projections, then summarize the attack results
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+device_ids = [0]
+data_root = abspath(join(os.getcwd(), '../../data'))
+setup_name = 'test_setup'  # debug
+setup_path = join(data_root, 'setups', setup_name)
+
+# get the attack configs
+spaa_cfg = get_attacker_cfg(attacker_name='SPAA', data_root=data_root, setup_list=[setup_name], device_ids=device_ids, load_pretrained=False, plot_on=True)
+
 project_capture_real_attack(spaa_cfg)
 
 # summarize the attack
@@ -171,6 +180,14 @@ perc_al_compennet_pp_cfg = get_attacker_cfg(attacker_name='PerC-AL+CompenNet++',
 perc_al_compennet_pp_cfg = run_projector_based_attack(perc_al_compennet_pp_cfg)
 
 # %% (6.2) [local] Project and capture PerC-AL+CompenNet++ generated adversarial projections, then summarize the attack results
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+device_ids = [0]
+data_root = abspath(join(os.getcwd(), '../../data'))
+setup_name = 'test_setup'
+setup_path = join(data_root, 'setups', setup_name)
+
+perc_al_compennet_pp_cfg = get_attacker_cfg(attacker_name='PerC-AL+CompenNet++', data_root=data_root, setup_list=[setup_name], device_ids=device_ids, load_pretrained=False, plot_on=True)
+
 project_capture_real_attack(perc_al_compennet_pp_cfg)
 
 # summarize the attack
